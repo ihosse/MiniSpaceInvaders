@@ -1060,10 +1060,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '"A" AND "D" TO MOVE, "CTRL" or "MOUSE" TO SHOT
+  m_text: '"ARROWS" TO MOVE AND "SPACE" TO SHOT
 
-    <PRESS CTRL OR CLICK
-    TO START>'
+    <PRESS SPACE TO START>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 78a39b468e68fc24682be5f48a104565, type: 2}
   m_sharedMaterial: {fileID: -4048801991458986696, guid: 78a39b468e68fc24682be5f48a104565, type: 2}
