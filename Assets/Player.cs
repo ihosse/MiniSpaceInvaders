@@ -1,9 +1,8 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(SpawnPrefab))]
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ITakeHits
 {
     public event Action OnKilled;
 
@@ -17,7 +16,7 @@ public class Player : MonoBehaviour
     private float speed = 5;
 
     [SerializeField]
-    private Bullet bullet;
+    private PlayerBullet bullet;
 
     private SpawnPrefab explosion;
     private bool isInControl;
@@ -67,15 +66,10 @@ public class Player : MonoBehaviour
             transform.position = new Vector2(horizontalPositionMinLimit, transform.position.y);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void TakeHit()
     {
-        if (collision.GetComponent<Bomb>()) 
-        {
-            Destroy(collision.gameObject);
-
-            explosion.Create(transform.position, Quaternion.identity);
-            gameObject.SetActive(false);
-            OnKilled?.Invoke();
-        }
+        explosion.Create(transform.position, Quaternion.identity);
+        gameObject.SetActive(false);
+        OnKilled?.Invoke();
     }
 }

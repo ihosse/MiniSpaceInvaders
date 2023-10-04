@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_MiniInvaders/Scenes/Menu.unity
+    guid: 45c45e128fd25bf49a982a78f523e436
+  - enabled: 1
     path: Assets/_MiniInvaders/Scenes/Game.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

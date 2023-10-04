@@ -4,7 +4,7 @@ using UnityEngine;
 public class Cannon : MonoBehaviour
 {
     [SerializeField]
-    private Bullet bullet;
+    private PlayerBullet bullet;
     private bool isReadyToShot;
 
     public void ActivateControl(bool value)

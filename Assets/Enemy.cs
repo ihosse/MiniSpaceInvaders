@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     private int points;
 
     [SerializeField]
-    private Bomb bullet;
+    private EnemyBomb bullet;
 
     private SpawnPrefab explosion;
     private Animator animator;
@@ -34,15 +34,7 @@ public class Enemy : MonoBehaviour
         explosion = GetComponent<SpawnPrefab>();
         ActivateMovement(false);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<Bullet>() != null)
-        {
-            collision.gameObject.SetActive(false);
-            explosion.Create(transform.position, Quaternion.identity);
-            OnKill?.Invoke(this);
-        }
-    }
+    
     private void Update()
     {
         if (!isMoving)
@@ -52,6 +44,12 @@ public class Enemy : MonoBehaviour
 
         CheckBoundaryReached();
         CheckVerticalLimit();
+    }
+
+    public void TakeHit()
+    {
+        explosion.Create(transform.position, Quaternion.identity);
+        OnKill?.Invoke(this);
     }
 
     public void Initialize(float initialSpeed, float horizontalPositionMinLimit, float horizontalPositionMaxLimit, float verticalGameOverLimit)
