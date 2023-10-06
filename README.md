@@ -11,4 +11,4 @@
 - GrafxKid's (https://grafxkid.itch.io/)
 
 ## Play it on Itch.io: 
-(https://ihosse.itch.io/)
+- https://ihosse.itch.io/
