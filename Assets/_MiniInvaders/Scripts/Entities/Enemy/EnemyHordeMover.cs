@@ -25,25 +25,36 @@ public class EnemyHordeMover : MonoBehaviour
     private float horizontalSpeed;
 
     private List<Enemy> enemies;
+    private EnemySpeedController enemySpeedController;
+
+    public void Initialize(int level, EnemySpeedController enemySpeedController)
+    {
+        this.enemySpeedController = enemySpeedController;
+        horizontalSpeed = initialHorizontalSpeed * (level * enemyVelocityIncreaseMultiplier);
+    }
 
     public void StartMoving(List <Enemy> enemies)
     {
         this.enemies = enemies;
+        enemySpeedController.DefineInitialSpeed(horizontalSpeed);
+        
         foreach (Enemy enemy in enemies)
         {
-            enemy.Initialize(horizontalSpeed, horizontalPositionMinLimit, horizontalPositionMaxLimit, verticalGameOverLimit);
+            enemy.Initialize(enemySpeedController, horizontalPositionMinLimit, horizontalPositionMaxLimit, verticalGameOverLimit);
             enemy.OnReachBoundary += InvertSpeedAndMoveDown;
         }
+
+        enemySpeedController.ActivateMovement(true);
     }
 
     public void IncreaseVelocity() 
     {
-        Enemy.IncreaseSpeed(enemyVelocityIncreaseMultiplier);
+        enemySpeedController.IncreaseSpeed(enemyVelocityIncreaseMultiplier);
     }
 
     public void StopMoving()
     {
-        Enemy.ActivateMovement(false);
+        enemySpeedController.ActivateMovement(false);
 
         if (enemies == null)
             return;
@@ -56,7 +67,7 @@ public class EnemyHordeMover : MonoBehaviour
 
     public void InvertSpeedAndMoveDown()
     {
-        Enemy.InvertSpeed();
+        enemySpeedController.InvertSpeed();
 
         if (enemies == null)
             return;
@@ -67,8 +78,5 @@ public class EnemyHordeMover : MonoBehaviour
         }
     }
 
-    public void DefineMovementSpeed(int level)
-    {
-        horizontalSpeed = initialHorizontalSpeed * (level * enemyVelocityIncreaseMultiplier);
-    }
+    
 }

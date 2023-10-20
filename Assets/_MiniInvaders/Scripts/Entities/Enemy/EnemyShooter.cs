@@ -32,8 +32,6 @@ public class EnemyShooter:MonoBehaviour
     {
         while (true)
         {
-            print(enemies.Count);
-
             if (enemies.Count <= 0)
                 break;
 

@@ -60,11 +60,16 @@ public class GameManager : MonoBehaviour
         Enemy.OnReachEarth -= OnLostOneLive;
 
         enemyHordeController.HordeMover.StopMoving();
-        player.ActivateControl(false);
 
-        hud.OnAnimationEnd += OnHudAnimationEndHandler;
+        if(player != null)
+            player.ActivateControl(false);
 
         Globals.lives--;
+
+        if (hud == null)
+            return;
+
+        hud.OnAnimationEnd += OnHudAnimationEndHandler;
 
         if(Globals.lives <= 0)
             hud.ShowGameOver();

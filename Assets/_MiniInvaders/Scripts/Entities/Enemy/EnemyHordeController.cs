@@ -28,15 +28,19 @@ public class EnemyHordeController : MonoBehaviour
     private int enemyKills;
     private int initialHordeSize;
 
+    private EnemySpeedController enemySpeedController;
+
     public void Initialize()
     {
         enemyKills = 0;
+
+        enemySpeedController = new EnemySpeedController();
 
         enemyHordeSpawner = GetComponent<EnemyHordeSpawner>();
         enemyHordeMover = GetComponent<EnemyHordeMover>();
         enemyShooter = GetComponent<EnemyShooter>();
 
-        enemyHordeMover.DefineMovementSpeed(Globals.level);
+        enemyHordeMover.Initialize(Globals.level, enemySpeedController);
         enemyShooter.DefineTimeToShot(Globals.level);
 
         enemyHordeSpawner.OnHordeSpawned += OnHordeSpawnedHandler;
@@ -93,7 +97,7 @@ public class EnemyHordeController : MonoBehaviour
         foreach (var killNumberToIncreaseVelocity in numberOfKillsToIncreaseSpeed)
         {
             if(enemyKills == killNumberToIncreaseVelocity)
-                Enemy.IncreaseSpeed(enemySpeedMultiplier);
+                enemySpeedController.IncreaseSpeed(enemySpeedMultiplier);
         }
     }
 }

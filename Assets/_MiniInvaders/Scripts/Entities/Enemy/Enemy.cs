@@ -5,8 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(SpawnPrefab))]
 public class Enemy : MonoBehaviour
 {
-    public static float Speed { get; private set; }
-    
     public int Points { get { return points; } }
     
     public event Action<Enemy> OnKill;
@@ -22,28 +20,39 @@ public class Enemy : MonoBehaviour
     private SpawnPrefab explosion;
     private Animator animator;
 
-    private static bool isMoving;
-
     private float horizontalPositionMinLimit;
     private float horizontalPositionMaxLimit;
     private float verticalGameOverLimit;
+
+    private EnemySpeedController speedController;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         explosion = GetComponent<SpawnPrefab>();
-        ActivateMovement(false);
     }
     
     private void Update()
     {
-        if (!isMoving)
+        if (speedController == null)
             return;
 
-        transform.Translate(Vector2.right * Time.deltaTime * Speed);
+        if (!speedController.IsMoving)
+            return;
+
+        transform.Translate(Vector2.right * Time.deltaTime * speedController.Speed);
 
         CheckBoundaryReached();
         CheckVerticalLimit();
+    }
+    public void Initialize(EnemySpeedController speedController, float horizontalPositionMinLimit, float horizontalPositionMaxLimit, float verticalGameOverLimit)
+    {
+        this.speedController = speedController;
+        this.horizontalPositionMinLimit = horizontalPositionMinLimit;
+        this.horizontalPositionMaxLimit = horizontalPositionMaxLimit;
+        this.verticalGameOverLimit = verticalGameOverLimit;
+
+        ActivateAnimation(true);
     }
 
     public void TakeHit()
@@ -52,29 +61,10 @@ public class Enemy : MonoBehaviour
         OnKill?.Invoke(this);
     }
 
-    public void Initialize(float initialSpeed, float horizontalPositionMinLimit, float horizontalPositionMaxLimit, float verticalGameOverLimit)
-    {
-        Speed = initialSpeed;
-        this.horizontalPositionMinLimit = horizontalPositionMinLimit;
-        this.horizontalPositionMaxLimit = horizontalPositionMaxLimit;
-        this.verticalGameOverLimit = verticalGameOverLimit;
-
-        ActivateAnimation(true);
-        ActivateMovement(true);
-    }
+    
     public void Shot()
     {
         Instantiate(bullet, transform.position, Quaternion.identity);
-    }
-
-    public static void IncreaseSpeed(float multiplier) 
-    {
-        Speed *= multiplier;
-    }
-
-    public static void ActivateMovement(bool value) 
-    {
-        isMoving = value;
     }
 
     public void ActivateAnimation(bool value) 
@@ -101,10 +91,5 @@ public class Enemy : MonoBehaviour
     {
         if(transform.position.y < verticalGameOverLimit) 
             OnReachEarth?.Invoke();
-    }
-
-    internal static void InvertSpeed()
-    {
-        Speed *= -1;
     }
 }

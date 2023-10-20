@@ -21,12 +21,10 @@ public class Player : MonoBehaviour, ITakeHits
     private SpawnPrefab explosion;
     private bool isInControl;
 
-    public void ActivateControl(bool value) 
+    private void Start()
     {
         explosion = GetComponent<SpawnPrefab>();
-        isInControl = value;
     }
-
     private void Update()
     {
         if (!isInControl)
@@ -35,6 +33,11 @@ public class Player : MonoBehaviour, ITakeHits
         Move();
         LimitHorizontalMovement();
         Shot();
+    }
+
+    public void ActivateControl(bool value) 
+    {
+        isInControl = value;
     }
 
     private void Shot()
