@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-public class DestroyTimer: MonoBehaviour
+public class ObjectDestroyer: MonoBehaviour
 {
     [SerializeField]
     private float secondsToDestroy;
