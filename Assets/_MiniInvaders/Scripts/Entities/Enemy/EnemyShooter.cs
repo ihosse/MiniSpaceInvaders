@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -14,12 +15,15 @@ public class EnemyShooter:MonoBehaviour
 
     private IEnumerator coroutine;
 
+    private List<Enemy> enemies;
+
     public void DefineTimeToShot(int level) 
     {
         timeToShoot = initialTimeToShoot / (level * timetoShootDecreaseFactor);
     }
-    public void StartShooting()
+    public void StartShooting(List<Enemy> enemies)
     {
+        this.enemies = enemies;
         coroutine = ChooseEnemyAndShot();
         StartCoroutine(coroutine);
     }
@@ -28,11 +32,13 @@ public class EnemyShooter:MonoBehaviour
     {
         while (true)
         {
-            if (EnemyHordeController.Enemies.Count <= 0)
+            print(enemies.Count);
+
+            if (enemies.Count <= 0)
                 break;
 
-            int randomIndex = Random.Range(0, EnemyHordeController.Enemies.Count);
-            EnemyHordeController.Enemies[randomIndex].Shot();
+            int randomIndex = Random.Range(0, enemies.Count);
+            enemies[randomIndex].Shot();
 
             yield return new WaitForSeconds(timeToShoot);
         }

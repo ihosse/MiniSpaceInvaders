@@ -12,10 +12,10 @@ public class EnemyHordeController : MonoBehaviour
 
     [SerializeField]
     private int[] numberOfKillsToIncreaseSpeed;
-    public static List<Enemy> Enemies{ get { return _enemies; } }
+    public List<Enemy> Enemies{ get { return _enemies; } }
     public EnemyHordeMover HordeMover { get { return enemyHordeMover; } }
 
-    private static List<Enemy> _enemies;
+    private List<Enemy> _enemies;
 
     private EnemyHordeSpawner enemyHordeSpawner;
     private EnemyHordeMover enemyHordeMover;
@@ -55,8 +55,8 @@ public class EnemyHordeController : MonoBehaviour
 
     public void StartAttack() 
     {
-        enemyHordeMover.StartMoving();
-        enemyShooter.StartShooting();
+        enemyHordeMover.StartMoving(_enemies);
+        enemyShooter.StartShooting(_enemies);
     }
 
     private void SubscribeToEnemyKills() 

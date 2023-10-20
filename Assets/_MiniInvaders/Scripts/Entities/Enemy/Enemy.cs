@@ -70,7 +70,6 @@ public class Enemy : MonoBehaviour
     public static void IncreaseSpeed(float multiplier) 
     {
         Speed *= multiplier;
-        print("new speed: " + Speed);
     }
 
     public static void ActivateMovement(bool value) 

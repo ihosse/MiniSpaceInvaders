@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHordeMover : MonoBehaviour 
@@ -23,9 +24,12 @@ public class EnemyHordeMover : MonoBehaviour
 
     private float horizontalSpeed;
 
-    public void StartMoving()
+    private List<Enemy> enemies;
+
+    public void StartMoving(List <Enemy> enemies)
     {
-        foreach (Enemy enemy in EnemyHordeController.Enemies)
+        this.enemies = enemies;
+        foreach (Enemy enemy in enemies)
         {
             enemy.Initialize(horizontalSpeed, horizontalPositionMinLimit, horizontalPositionMaxLimit, verticalGameOverLimit);
             enemy.OnReachBoundary += InvertSpeedAndMoveDown;
@@ -41,7 +45,10 @@ public class EnemyHordeMover : MonoBehaviour
     {
         Enemy.ActivateMovement(false);
 
-        foreach (Enemy enemy in EnemyHordeController.Enemies)
+        if (enemies == null)
+            return;
+
+        foreach (Enemy enemy in enemies)
         {
             enemy.ActivateAnimation(false);
         }
@@ -51,7 +58,10 @@ public class EnemyHordeMover : MonoBehaviour
     {
         Enemy.InvertSpeed();
 
-        foreach (Enemy enemy in EnemyHordeController.Enemies)
+        if (enemies == null)
+            return;
+
+        foreach (Enemy enemy in enemies)
         {
             enemy?.transform.Translate(Vector2.down * verticalSpeed);
         }
