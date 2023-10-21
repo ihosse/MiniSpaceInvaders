@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Sockets;
 using TMPro;
 using UnityEngine;
 
-public class UpdateMenuInfo : MonoBehaviour
+public class StartScreenManager : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI score;
