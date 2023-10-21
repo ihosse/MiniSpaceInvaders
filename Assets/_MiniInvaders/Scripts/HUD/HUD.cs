@@ -28,7 +28,7 @@ public class HUD:MonoBehaviour
         centerLabel.gameObject.SetActive(false);
         upperLabel.gameObject.SetActive(false);
 
-        UpdateScore(0);
+        UpdateScore(Globals.Score);
         UpdateHiScore(Globals.HighScore);
         UpdateLives(Globals.lives);
     }

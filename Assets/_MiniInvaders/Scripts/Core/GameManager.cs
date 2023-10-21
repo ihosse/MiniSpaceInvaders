@@ -32,8 +32,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Globals.Score = 0;
-
         enemyHordeController.Initialize();
     }
     private void OnHordeSpawned()
@@ -71,10 +69,16 @@ public class GameManager : MonoBehaviour
 
         hud.OnAnimationEnd += OnHudAnimationEndHandler;
 
-        if(Globals.lives <= 0)
+        if (Globals.lives <= 0)
+        {
+            Globals.level = 1;
+            Globals.Score = 0;
             hud.ShowGameOver();
+        }
         else
+        {
             hud.LostOneLive();
+        }
     }
 
     private void OnLevelCompletedHandler()
