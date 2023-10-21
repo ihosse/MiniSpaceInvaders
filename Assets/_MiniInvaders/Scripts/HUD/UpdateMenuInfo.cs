@@ -14,7 +14,8 @@ public class UpdateMenuInfo : MonoBehaviour
 
     private void Start()
     {
-        score.text = "SCORE:\n" + 0.ToString("D5");
+        Globals.Score = 0;
+        score.text = "SCORE:\n" + Globals.Score.ToString("D5");
         hiScore.text = "HI-SCORE:\n" + Globals.HighScore.ToString("D5");
     }
 }

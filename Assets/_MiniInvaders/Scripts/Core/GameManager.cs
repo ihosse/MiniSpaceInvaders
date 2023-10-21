@@ -72,7 +72,6 @@ public class GameManager : MonoBehaviour
         if (Globals.lives <= 0)
         {
             Globals.level = 1;
-            Globals.Score = 0;
             hud.ShowGameOver();
         }
         else
