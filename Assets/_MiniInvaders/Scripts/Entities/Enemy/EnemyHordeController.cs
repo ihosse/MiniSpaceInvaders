@@ -12,10 +12,10 @@ public class EnemyHordeController : MonoBehaviour
 
     [SerializeField]
     private int[] numberOfKillsToIncreaseSpeed;
-    public static List<Enemy> Enemies{ get { return _enemies; } }
+    public List<Enemy> Enemies{ get { return _enemies; } }
     public EnemyHordeMover HordeMover { get { return enemyHordeMover; } }
 
-    private static List<Enemy> _enemies;
+    private List<Enemy> _enemies;
 
     private EnemyHordeSpawner enemyHordeSpawner;
     private EnemyHordeMover enemyHordeMover;
@@ -28,15 +28,19 @@ public class EnemyHordeController : MonoBehaviour
     private int enemyKills;
     private int initialHordeSize;
 
+    private EnemySpeedController enemySpeedController;
+
     public void Initialize()
     {
         enemyKills = 0;
+
+        enemySpeedController = new EnemySpeedController();
 
         enemyHordeSpawner = GetComponent<EnemyHordeSpawner>();
         enemyHordeMover = GetComponent<EnemyHordeMover>();
         enemyShooter = GetComponent<EnemyShooter>();
 
-        enemyHordeMover.DefineMovementSpeed(Globals.level);
+        enemyHordeMover.Initialize(Globals.level, enemySpeedController);
         enemyShooter.DefineTimeToShot(Globals.level);
 
         enemyHordeSpawner.OnHordeSpawned += OnHordeSpawnedHandler;
@@ -55,8 +59,8 @@ public class EnemyHordeController : MonoBehaviour
 
     public void StartAttack() 
     {
-        enemyHordeMover.StartMoving();
-        enemyShooter.StartShooting();
+        enemyHordeMover.StartMoving(_enemies);
+        enemyShooter.StartShooting(_enemies);
     }
 
     private void SubscribeToEnemyKills() 
@@ -93,7 +97,7 @@ public class EnemyHordeController : MonoBehaviour
         foreach (var killNumberToIncreaseVelocity in numberOfKillsToIncreaseSpeed)
         {
             if(enemyKills == killNumberToIncreaseVelocity)
-                Enemy.IncreaseSpeed(enemySpeedMultiplier);
+                enemySpeedController.IncreaseSpeed(enemySpeedMultiplier);
         }
     }
 }

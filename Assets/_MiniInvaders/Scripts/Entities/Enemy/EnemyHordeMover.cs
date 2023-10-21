@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHordeMover : MonoBehaviour 
@@ -23,25 +24,42 @@ public class EnemyHordeMover : MonoBehaviour
 
     private float horizontalSpeed;
 
-    public void StartMoving()
+    private List<Enemy> enemies;
+    private EnemySpeedController enemySpeedController;
+
+    public void Initialize(int level, EnemySpeedController enemySpeedController)
     {
-        foreach (Enemy enemy in EnemyHordeController.Enemies)
+        this.enemySpeedController = enemySpeedController;
+        horizontalSpeed = initialHorizontalSpeed * (level * enemyVelocityIncreaseMultiplier);
+    }
+
+    public void StartMoving(List <Enemy> enemies)
+    {
+        this.enemies = enemies;
+        enemySpeedController.DefineInitialSpeed(horizontalSpeed);
+        
+        foreach (Enemy enemy in enemies)
         {
-            enemy.Initialize(horizontalSpeed, horizontalPositionMinLimit, horizontalPositionMaxLimit, verticalGameOverLimit);
+            enemy.Initialize(enemySpeedController, horizontalPositionMinLimit, horizontalPositionMaxLimit, verticalGameOverLimit);
             enemy.OnReachBoundary += InvertSpeedAndMoveDown;
         }
+
+        enemySpeedController.ActivateMovement(true);
     }
 
     public void IncreaseVelocity() 
     {
-        Enemy.IncreaseSpeed(enemyVelocityIncreaseMultiplier);
+        enemySpeedController.IncreaseSpeed(enemyVelocityIncreaseMultiplier);
     }
 
     public void StopMoving()
     {
-        Enemy.ActivateMovement(false);
+        enemySpeedController.ActivateMovement(false);
 
-        foreach (Enemy enemy in EnemyHordeController.Enemies)
+        if (enemies == null)
+            return;
+
+        foreach (Enemy enemy in enemies)
         {
             enemy.ActivateAnimation(false);
         }
@@ -49,16 +67,16 @@ public class EnemyHordeMover : MonoBehaviour
 
     public void InvertSpeedAndMoveDown()
     {
-        Enemy.InvertSpeed();
+        enemySpeedController.InvertSpeed();
 
-        foreach (Enemy enemy in EnemyHordeController.Enemies)
+        if (enemies == null)
+            return;
+
+        foreach (Enemy enemy in enemies)
         {
             enemy?.transform.Translate(Vector2.down * verticalSpeed);
         }
     }
 
-    public void DefineMovementSpeed(int level)
-    {
-        horizontalSpeed = initialHorizontalSpeed * (level * enemyVelocityIncreaseMultiplier);
-    }
+    
 }
