@@ -2,9 +2,12 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(SpawnPrefab))]
-public class Player : MonoBehaviour, ITakeHits
+public class Player : MonoBehaviour, IDamageable
 {
     public event Action OnKilled;
+
+    [SerializeField]
+    private Transform cannonTransform;
 
     [SerializeField]
     private float horizontalPositionMaxLimit;
@@ -48,7 +51,7 @@ public class Player : MonoBehaviour, ITakeHits
         if (Input.GetButtonDown("Fire1"))
         {
             bullet.gameObject.SetActive(true);
-            bullet.transform.position = transform.position;
+            bullet.transform.position = cannonTransform.position;
         }
     }
 
