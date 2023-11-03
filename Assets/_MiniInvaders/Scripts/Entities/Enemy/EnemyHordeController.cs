@@ -71,12 +71,12 @@ public class EnemyHordeController : MonoBehaviour
         }
     }
 
-    private void OnKillHandler(InvaderController enemy)
+    private void OnKillHandler(Enemy enemy)
     {
         OnEnemyKilled?.Invoke(enemy.Points);
 
         Destroy(enemy.gameObject);
-        _enemies.Remove(enemy);
+        _enemies.Remove(enemy as InvaderController);
 
         enemyKills++; 
 
