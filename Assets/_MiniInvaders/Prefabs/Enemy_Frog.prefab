@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6042506159034546063}
   - component: {fileID: 2921747711562548720}
   - component: {fileID: 6405365452362976310}
+  - component: {fileID: -3863014072367475860}
   - component: {fileID: 2336348773256107131}
   - component: {fileID: 1521280002590202541}
   - component: {fileID: 16454840439794314}
@@ -102,6 +103,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   points: 10
   bullet: {fileID: 576802920843398798, guid: 40e84b866af6f064c93abe48519bbcca, type: 3}
+--- !u!114 &-3863014072367475860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3230739653990777869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed2cf528eaf69314fae8cc4dbda1dde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &2336348773256107131
 BoxCollider2D:
   m_ObjectHideFlags: 0

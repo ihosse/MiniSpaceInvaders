@@ -993,9 +993,10 @@ MonoBehaviour:
   initialHorizontalSpeed: 0.5
   enemyVelocityIncreaseMultiplier: 1.1
   verticalSpeed: 0.15
-  horizontalPositionMinLimit: -5
-  horizontalPositionMaxLimit: 5
-  verticalGameOverLimit: -2.5
+  enemyPositionLimits:
+    horizontalMin: -5
+    horizontalMax: 5
+    verticalGameOver: -2.5
 --- !u!114 &785965792
 MonoBehaviour:
   m_ObjectHideFlags: 0

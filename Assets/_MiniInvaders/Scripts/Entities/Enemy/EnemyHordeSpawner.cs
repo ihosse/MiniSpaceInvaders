@@ -5,7 +5,7 @@ using System;
 
 class EnemyHordeSpawner : MonoBehaviour
 {
-    public event Action<List<Enemy>> OnHordeSpawned;
+    public event Action<List<InvaderController>> OnHordeSpawned;
 
     [SerializeField]
     private int horizontalSize = 11;
@@ -29,7 +29,7 @@ class EnemyHordeSpawner : MonoBehaviour
     public IEnumerator CreateEnemyHorde()
     {
         int enemyIndex = 0;
-        List<Enemy> enemies = new List<Enemy>();
+        List<InvaderController> enemies = new List<InvaderController>();
 
         for (int row = 0; row < verticalSize; row++)
         {
@@ -40,7 +40,7 @@ class EnemyHordeSpawner : MonoBehaviour
                 float horizontalPosition = (col * spaceBetweenEnemies) - horizontalOffset;
                 float verticalPosition = (row * spaceBetweenEnemies) - verticalOffset;
 
-                var currentEnemy = Instantiate(enemiesPrefab[enemyIndex], this.transform).GetComponent<Enemy>();
+                var currentEnemy = Instantiate(enemiesPrefab[enemyIndex], this.transform).GetComponent<InvaderController>();
                 currentEnemy.transform.position = new Vector2(horizontalPosition, verticalPosition);
 
                 enemies.Add(currentEnemy);

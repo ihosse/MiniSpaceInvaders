@@ -12,10 +12,10 @@ public class EnemyHordeController : MonoBehaviour
 
     [SerializeField]
     private int[] numberOfKillsToIncreaseSpeed;
-    public List<Enemy> Enemies{ get { return _enemies; } }
+    public List<InvaderController> Enemies{ get { return _enemies; } }
     public EnemyHordeMover HordeMover { get { return enemyHordeMover; } }
 
-    private List<Enemy> _enemies;
+    private List<InvaderController> _enemies;
 
     private EnemyHordeSpawner enemyHordeSpawner;
     private EnemyHordeMover enemyHordeMover;
@@ -47,7 +47,7 @@ public class EnemyHordeController : MonoBehaviour
         StartCoroutine(enemyHordeSpawner.CreateEnemyHorde());
     }
 
-    private void OnHordeSpawnedHandler(List<Enemy> enemies)
+    private void OnHordeSpawnedHandler(List<InvaderController> enemies)
     {
         _enemies = enemies;
         initialHordeSize = _enemies.Count;
@@ -65,13 +65,13 @@ public class EnemyHordeController : MonoBehaviour
 
     private void SubscribeToEnemyKills() 
     {
-        foreach(Enemy enemy in _enemies) 
+        foreach(InvaderController enemy in _enemies) 
         {
             enemy.OnKill += OnKillHandler;
         }
     }
 
-    private void OnKillHandler(Enemy enemy)
+    private void OnKillHandler(InvaderController enemy)
     {
         OnEnemyKilled?.Invoke(enemy.Points);
 

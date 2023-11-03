@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHordeMover : MonoBehaviour 
@@ -14,17 +13,11 @@ public class EnemyHordeMover : MonoBehaviour
     private float verticalSpeed = .25f;
 
     [SerializeField]
-    private float horizontalPositionMinLimit;
-
-    [SerializeField]
-    private float horizontalPositionMaxLimit;
-
-    [SerializeField]
-    private float verticalGameOverLimit;
+    private EnemyPositionLimits enemyPositionLimits;
 
     private float horizontalSpeed;
 
-    private List<Enemy> enemies;
+    private List<InvaderController> enemies;
     private EnemySpeedController enemySpeedController;
 
     public void Initialize(int level, EnemySpeedController enemySpeedController)
@@ -33,14 +26,14 @@ public class EnemyHordeMover : MonoBehaviour
         horizontalSpeed = initialHorizontalSpeed * (level * enemyVelocityIncreaseMultiplier);
     }
 
-    public void StartMoving(List <Enemy> enemies)
+    public void StartMoving(List <InvaderController> enemies)
     {
         this.enemies = enemies;
         enemySpeedController.DefineInitialSpeed(horizontalSpeed);
         
-        foreach (Enemy enemy in enemies)
+        foreach (InvaderController enemy in enemies)
         {
-            enemy.Initialize(enemySpeedController, horizontalPositionMinLimit, horizontalPositionMaxLimit, verticalGameOverLimit);
+            enemy.Initialize(enemySpeedController, enemyPositionLimits);
             enemy.OnReachBoundary += InvertSpeedAndMoveDown;
         }
 
@@ -59,7 +52,7 @@ public class EnemyHordeMover : MonoBehaviour
         if (enemies == null)
             return;
 
-        foreach (Enemy enemy in enemies)
+        foreach (InvaderController enemy in enemies)
         {
             enemy.ActivateAnimation(false);
         }
@@ -72,11 +65,19 @@ public class EnemyHordeMover : MonoBehaviour
         if (enemies == null)
             return;
 
-        foreach (Enemy enemy in enemies)
+        foreach (InvaderController enemy in enemies)
         {
             enemy?.transform.Translate(Vector2.down * verticalSpeed);
         }
     }
 
     
+}
+
+[System.Serializable]
+public struct EnemyPositionLimits
+{
+    public float horizontalMin;
+    public float horizontalMax;
+    public float verticalGameOver;
 }

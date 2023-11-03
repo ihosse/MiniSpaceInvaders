@@ -15,13 +15,13 @@ public class EnemyShooter:MonoBehaviour
 
     private IEnumerator coroutine;
 
-    private List<Enemy> enemies;
+    private List<InvaderController> enemies;
 
     public void DefineTimeToShot(int level) 
     {
         timeToShoot = initialTimeToShoot / (level * timetoShootDecreaseFactor);
     }
-    public void StartShooting(List<Enemy> enemies)
+    public void StartShooting(List<InvaderController> enemies)
     {
         this.enemies = enemies;
         coroutine = ChooseEnemyAndShot();

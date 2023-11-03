@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 7694698892635859445}
   - component: {fileID: 4096896995465093519}
   - component: {fileID: -5745976750879912384}
-  - component: {fileID: 1496166023073544558}
+  - component: {fileID: 8234837814683361360}
   - component: {fileID: 3879242102310252234}
+  - component: {fileID: 1496166023073544558}
   - component: {fileID: 6662952620242465157}
   m_Layer: 0
   m_Name: Enemy_Candy
@@ -102,6 +103,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   points: 20
   bullet: {fileID: 576802920843398798, guid: 40e84b866af6f064c93abe48519bbcca, type: 3}
+--- !u!114 &8234837814683361360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8719697761786141472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed2cf528eaf69314fae8cc4dbda1dde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3879242102310252234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8719697761786141472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 421b0bbc7dc34c54593141617bd3327b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 7239053692541487155, guid: 2c5a755ebe433e647abae2f3b335347a, type: 3}
 --- !u!61 &1496166023073544558
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -147,19 +173,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.64}
   m_EdgeRadius: 0
---- !u!114 &3879242102310252234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8719697761786141472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 421b0bbc7dc34c54593141617bd3327b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 7239053692541487155, guid: 2c5a755ebe433e647abae2f3b335347a, type: 3}
 --- !u!95 &6662952620242465157
 Animator:
   serializedVersion: 5

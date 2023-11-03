@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
         player.OnKilled += OnLostOneLive;
 
-        Enemy.OnReachEarth += OnLostOneLive;
+        InvaderController.OnReachEarth += OnLostOneLive;
     }
 
     private void Start()
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     private void OnLostOneLive()
     {
         player.OnKilled -= OnLostOneLive;
-        Enemy.OnReachEarth -= OnLostOneLive;
+        InvaderController.OnReachEarth -= OnLostOneLive;
 
         enemyHordeController.HordeMover.StopMoving();
 

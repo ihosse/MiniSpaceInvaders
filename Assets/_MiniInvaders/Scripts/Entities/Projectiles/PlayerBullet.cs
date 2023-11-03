@@ -4,7 +4,7 @@ public class PlayerBullet : Projectile
 {
     protected override void CollisionHandler(Collider2D collision)
     {
-        var enemy = collision.GetComponent<Enemy>();
+        var enemy = collision.GetComponent<InvaderController>();
         if (enemy != null)
         {
             gameObject.SetActive(false);
