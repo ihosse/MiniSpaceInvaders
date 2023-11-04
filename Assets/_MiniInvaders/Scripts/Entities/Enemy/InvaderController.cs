@@ -2,11 +2,9 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(SpawnPrefab))]
 [RequireComponent(typeof(InvaderMovement))]
 public class InvaderController : Enemy
-{
-    
+{  
     public Action OnReachBoundary;
     public static Action OnReachEarth;
 
@@ -37,8 +35,5 @@ public class InvaderController : Enemy
         Instantiate(bullet, transform.position, Quaternion.identity);
     }
 
-    public void ActivateAnimation(bool value) 
-    {
-        animator.SetBool("IsAnimating", value);
-    }
+    
 }

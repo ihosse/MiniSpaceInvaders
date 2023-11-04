@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     private HUD hud;
 
     [SerializeField]
+    private UFOSpawner ufoSpawner;
+
+    [SerializeField]
     private EnemyHordeController enemyHordeController;
 
     [SerializeField]

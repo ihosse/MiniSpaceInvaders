@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
+[RequireComponent(typeof(UFOSpawner))]
 [RequireComponent(typeof(EnemyHordeSpawner))]
 [RequireComponent(typeof(EnemyHordeMover))]
 [RequireComponent(typeof(EnemyShooter))]
@@ -17,6 +18,7 @@ public class EnemyHordeController : MonoBehaviour
 
     private List<InvaderController> _enemies;
 
+    private UFOSpawner ufoSpawner;
     private EnemyHordeSpawner enemyHordeSpawner;
     private EnemyHordeMover enemyHordeMover;
     private EnemyShooter enemyShooter;
@@ -36,10 +38,12 @@ public class EnemyHordeController : MonoBehaviour
 
         enemySpeedController = new EnemySpeedController();
 
+        ufoSpawner = GetComponent<UFOSpawner>();
         enemyHordeSpawner = GetComponent<EnemyHordeSpawner>();
         enemyHordeMover = GetComponent<EnemyHordeMover>();
         enemyShooter = GetComponent<EnemyShooter>();
 
+        ufoSpawner.Initialize(enemySpeedController);
         enemyHordeMover.Initialize(Globals.level, enemySpeedController);
         enemyShooter.DefineTimeToShot(Globals.level);
 
@@ -65,13 +69,21 @@ public class EnemyHordeController : MonoBehaviour
 
     private void SubscribeToEnemyKills() 
     {
+        ufoSpawner.Ufo.OnKill += OnUFOKillHander;
+
         foreach(InvaderController enemy in _enemies) 
         {
-            enemy.OnKill += OnKillHandler;
+            enemy.OnKill += OnInvaderKillHandler;
         }
     }
 
-    private void OnKillHandler(Enemy enemy)
+    private void OnUFOKillHander(Enemy enemy)
+    {
+        OnEnemyKilled?.Invoke(enemy.Points);
+        enemy.gameObject.SetActive(false);
+    }
+
+    private void OnInvaderKillHandler(Enemy enemy)
     {
         OnEnemyKilled?.Invoke(enemy.Points);
 
