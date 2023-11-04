@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-class EnemyHordeSpawner : MonoBehaviour
+class InvaderHordeSpawner : MonoBehaviour
 {
     public event Action<List<InvaderController>> OnHordeSpawned;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyShooter:MonoBehaviour 
+public class InvaderHordeShooter:MonoBehaviour 
 {
     [SerializeField]
     private float initialTimeToShoot = 1;

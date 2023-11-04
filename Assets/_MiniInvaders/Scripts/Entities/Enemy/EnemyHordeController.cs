@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System;
 
 [RequireComponent(typeof(UFOSpawner))]
-[RequireComponent(typeof(EnemyHordeSpawner))]
-[RequireComponent(typeof(EnemyHordeMover))]
-[RequireComponent(typeof(EnemyShooter))]
+[RequireComponent(typeof(InvaderHordeSpawner))]
+[RequireComponent(typeof(InvaderHordeMover))]
+[RequireComponent(typeof(InvaderHordeShooter))]
 public class EnemyHordeController : MonoBehaviour
 {
     [SerializeField]
@@ -14,14 +14,14 @@ public class EnemyHordeController : MonoBehaviour
     [SerializeField]
     private int[] numberOfKillsToIncreaseSpeed;
     public List<InvaderController> Enemies{ get { return _enemies; } }
-    public EnemyHordeMover HordeMover { get { return enemyHordeMover; } }
+    public InvaderHordeMover HordeMover { get { return enemyHordeMover; } }
 
     private List<InvaderController> _enemies;
 
     private UFOSpawner ufoSpawner;
-    private EnemyHordeSpawner enemyHordeSpawner;
-    private EnemyHordeMover enemyHordeMover;
-    private EnemyShooter enemyShooter;
+    private InvaderHordeSpawner enemyHordeSpawner;
+    private InvaderHordeMover enemyHordeMover;
+    private InvaderHordeShooter enemyShooter;
 
     public event Action OnHordeSpawned;
     public event Action OnLevelCompleted;
@@ -39,9 +39,9 @@ public class EnemyHordeController : MonoBehaviour
         enemySpeedController = new EnemySpeedController();
 
         ufoSpawner = GetComponent<UFOSpawner>();
-        enemyHordeSpawner = GetComponent<EnemyHordeSpawner>();
-        enemyHordeMover = GetComponent<EnemyHordeMover>();
-        enemyShooter = GetComponent<EnemyShooter>();
+        enemyHordeSpawner = GetComponent<InvaderHordeSpawner>();
+        enemyHordeMover = GetComponent<InvaderHordeMover>();
+        enemyShooter = GetComponent<InvaderHordeShooter>();
 
         ufoSpawner.Initialize(enemySpeedController);
         enemyHordeMover.Initialize(Globals.level, enemySpeedController);

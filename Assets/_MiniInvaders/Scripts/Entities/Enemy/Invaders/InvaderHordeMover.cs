@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHordeMover : MonoBehaviour 
+public class InvaderHordeMover : MonoBehaviour 
 {
     [SerializeField]
     private float initialHorizontalSpeed = 1;
