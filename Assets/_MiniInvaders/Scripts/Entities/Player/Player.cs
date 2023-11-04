@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(SpawnPrefab))]
-public class Player : MonoBehaviour, IDamageable
+public class Player : MonoBehaviour
 {
     public event Action OnKilled;
 
