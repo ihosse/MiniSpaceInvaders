@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class StartScreenManager : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI score;
