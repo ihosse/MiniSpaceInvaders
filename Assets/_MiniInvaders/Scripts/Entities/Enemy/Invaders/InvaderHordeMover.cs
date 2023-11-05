@@ -1,11 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct EnemyPositionLimits
+{
+    public float horizontalMin;
+    public float horizontalMax;
+    public float verticalGameOver;
+}
+
 public class InvaderHordeMover : MonoBehaviour 
 {
-    [SerializeField]
-    private float initialHorizontalSpeed = 1;
-
     [SerializeField]
     private float enemyVelocityIncreaseMultiplier = 1.1f;
 
@@ -15,21 +20,18 @@ public class InvaderHordeMover : MonoBehaviour
     [SerializeField]
     private EnemyPositionLimits enemyPositionLimits;
 
-    private float horizontalSpeed;
-
     private List<InvaderController> enemies;
     private EnemySpeedController enemySpeedController;
 
     public void Initialize(int level, EnemySpeedController enemySpeedController)
     {
         this.enemySpeedController = enemySpeedController;
-        horizontalSpeed = initialHorizontalSpeed * (level * enemyVelocityIncreaseMultiplier);
     }
 
     public void StartMoving(List <InvaderController> enemies)
     {
         this.enemies = enemies;
-        enemySpeedController.DefineInitialSpeed(horizontalSpeed);
+        enemySpeedController.DefineInitialSpeed();
         
         foreach (InvaderController enemy in enemies)
         {
@@ -70,14 +72,4 @@ public class InvaderHordeMover : MonoBehaviour
             enemy?.transform.Translate(Vector2.down * verticalSpeed);
         }
     }
-
-    
-}
-
-[System.Serializable]
-public struct EnemyPositionLimits
-{
-    public float horizontalMin;
-    public float horizontalMax;
-    public float verticalGameOver;
 }

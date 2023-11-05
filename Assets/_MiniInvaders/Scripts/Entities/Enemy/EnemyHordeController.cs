@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(UFOSpawner))]
 [RequireComponent(typeof(InvaderHordeSpawner))]
@@ -8,12 +9,7 @@ using System;
 [RequireComponent(typeof(InvaderHordeShooter))]
 public class EnemyHordeController : MonoBehaviour
 {
-    [SerializeField]
-    private float enemySpeedMultiplier = 2;
-
-    [SerializeField]
-    private int[] numberOfKillsToIncreaseSpeed;
-    public List<InvaderController> Enemies{ get { return _enemies; } }
+    public List<InvaderController> Enemies { get { return _enemies; } }
     public InvaderHordeMover HordeMover { get { return enemyHordeMover; } }
 
     private List<InvaderController> _enemies;
@@ -36,7 +32,7 @@ public class EnemyHordeController : MonoBehaviour
     {
         enemyKills = 0;
 
-        enemySpeedController = new EnemySpeedController();
+        enemySpeedController = GetComponent<EnemySpeedController>();
 
         ufoSpawner = GetComponent<UFOSpawner>();
         enemyHordeSpawner = GetComponent<InvaderHordeSpawner>();
@@ -61,17 +57,17 @@ public class EnemyHordeController : MonoBehaviour
         OnHordeSpawned?.Invoke();
     }
 
-    public void StartAttack() 
+    public void StartAttack()
     {
         enemyHordeMover.StartMoving(_enemies);
         enemyShooter.StartShooting(_enemies);
     }
 
-    private void SubscribeToEnemyKills() 
+    private void SubscribeToEnemyKills()
     {
         ufoSpawner.Ufo.OnKill += OnUFOKillHander;
 
-        foreach(InvaderController enemy in _enemies) 
+        foreach (InvaderController enemy in _enemies)
         {
             enemy.OnKill += OnInvaderKillHandler;
         }
@@ -90,7 +86,7 @@ public class EnemyHordeController : MonoBehaviour
         Destroy(enemy.gameObject);
         _enemies.Remove(enemy as InvaderController);
 
-        enemyKills++; 
+        enemyKills++;
 
         CheckEnemyVelocityIncrease();
         CheckIfLevelCompleted();
@@ -98,7 +94,7 @@ public class EnemyHordeController : MonoBehaviour
 
     private void CheckIfLevelCompleted()
     {
-        if(_enemies.Count <= 0) 
+        if (_enemies.Count <= 0)
         {
             OnLevelCompleted?.Invoke();
         }
@@ -106,10 +102,7 @@ public class EnemyHordeController : MonoBehaviour
 
     private void CheckEnemyVelocityIncrease()
     {
-        foreach (var killNumberToIncreaseVelocity in numberOfKillsToIncreaseSpeed)
-        {
-            if(enemyKills == killNumberToIncreaseVelocity)
-                enemySpeedController.IncreaseSpeed(enemySpeedMultiplier);
-        }
+        float percentOfEnemyKilled = (float)enemyKills / (float)initialHordeSize;
+        enemySpeedController.IncreaseSpeed(percentOfEnemyKilled);
     }
 }

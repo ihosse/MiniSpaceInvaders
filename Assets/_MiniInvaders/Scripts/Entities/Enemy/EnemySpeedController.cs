@@ -1,17 +1,26 @@
-public class EnemySpeedController
+using UnityEngine;
+
+public class EnemySpeedController:MonoBehaviour
 {
-    public float Speed { get; private set; }
+    public float Speed { get { return direction * speed; } }
 
     public bool IsMoving { get; private set; }
 
-    public void DefineInitialSpeed(float speed)
+    [SerializeField]
+    private AnimationCurve speedBase;
+
+    private int direction = 1;
+    private float speed;
+
+    public void DefineInitialSpeed()
     {
-        Speed = speed;
+        speed = speedBase.Evaluate(0);
     }
     
-    public void IncreaseSpeed(float multiplier)
+    public void IncreaseSpeed(float percentOfEnemyKills)
     {
-        Speed *= multiplier;
+        speed = speedBase.Evaluate(percentOfEnemyKills);
+        print(percentOfEnemyKills + " " + speed);
     }
 
     public void ActivateMovement(bool value)
@@ -21,6 +30,6 @@ public class EnemySpeedController
 
     public void InvertSpeed()
     {
-        Speed *= -1;
+        direction *= -1;
     }
 }
