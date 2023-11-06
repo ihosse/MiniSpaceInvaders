@@ -7,20 +7,24 @@ public class EnemySpeedController:MonoBehaviour
     public bool IsMoving { get; private set; }
 
     [SerializeField]
-    private AnimationCurve speedBase;
+    private float initialSpeed = .5f;
+
+    [SerializeField]
+    private AnimationCurve difficulty;
 
     private int direction = 1;
     private float speed;
+    private float baseSpeed;
 
-    public void DefineInitialSpeed()
+    public void DefineInitialSpeed(int level)
     {
-        speed = speedBase.Evaluate(0);
+        baseSpeed = level * initialSpeed;
+        speed = difficulty.Evaluate(0) + baseSpeed;
     }
     
     public void IncreaseSpeed(float percentOfEnemyKills)
     {
-        speed = speedBase.Evaluate(percentOfEnemyKills);
-        print(percentOfEnemyKills + " " + speed);
+        speed = difficulty.Evaluate(percentOfEnemyKills) + baseSpeed;
     }
 
     public void ActivateMovement(bool value)

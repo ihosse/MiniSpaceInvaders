@@ -23,15 +23,18 @@ public class InvaderHordeMover : MonoBehaviour
     private List<InvaderController> enemies;
     private EnemySpeedController enemySpeedController;
 
-    public void Initialize(int level, EnemySpeedController enemySpeedController)
+    private int currentLevel;
+
+    public void Initialize(int currentLevel, EnemySpeedController enemySpeedController)
     {
+        this.currentLevel = currentLevel;
         this.enemySpeedController = enemySpeedController;
     }
 
     public void StartMoving(List <InvaderController> enemies)
     {
         this.enemies = enemies;
-        enemySpeedController.DefineInitialSpeed();
+        enemySpeedController.DefineInitialSpeed(currentLevel);
         
         foreach (InvaderController enemy in enemies)
         {
