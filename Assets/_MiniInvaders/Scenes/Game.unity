@@ -1029,8 +1029,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd6d73205e51624389ff263ef9535ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minTimeToShow: 5
-  maxTimeToShow: 10
+  minTimeToShow: 10
+  maxTimeToShow: 20
   ufoPrefab: {fileID: 3524306446692821059, guid: 8fdfcb3813a3f634084ae8e47ff2d5ce, type: 3}
 --- !u!114 &785965794
 MonoBehaviour:
@@ -1084,8 +1084,8 @@ MonoBehaviour:
       inWeight: 0.20420702
       outWeight: 0
     - serializedVersion: 3
-      time: 0.9347529
-      value: 2.0042934
+      time: 0.9482594
+      value: 2.0008314
       inSlope: 29.706005
       outSlope: 29.706005
       tangentMode: 0
@@ -1093,8 +1093,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.56084263
     - serializedVersion: 3
-      time: 0.9356154
-      value: 2.9944053
+      time: 0.94912195
+      value: 2.9909432
       inSlope: 0.14529309
       outSlope: 0.14529309
       tangentMode: 0
@@ -1104,8 +1104,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.9872976
       value: 2.9921854
-      inSlope: -0.04295321
-      outSlope: -0.04295321
+      inSlope: 0.032538045
+      outSlope: 0.032538045
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334

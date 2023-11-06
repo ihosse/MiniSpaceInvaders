@@ -28,10 +28,10 @@ public class UFOSpawner : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitForSeconds(timeToShow);
+
             timeToShow = Random.Range(minTimeToShow, maxTimeToShow);
             Ufo.gameObject.SetActive(true);
-
-            yield return new WaitForSeconds(timeToShow);
         }
     }
 }
