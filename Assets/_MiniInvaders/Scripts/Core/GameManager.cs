@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     private HUD hud;
 
     [SerializeField]
-    private EnemyHordeController enemyHordeController;
+    private EnemyHorde enemyHordeController;
 
     [SerializeField]
     private float verticalLimitToGameOver;
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
         player.OnKilled += OnLostOneLive;
 
-        InvaderController.OnReachEarth += OnLostOneLive;
+        Invader.OnReachEarth += OnLostOneLive;
     }
 
     private void Start()
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     private void OnLostOneLive()
     {
         player.OnKilled -= OnLostOneLive;
-        InvaderController.OnReachEarth -= OnLostOneLive;
+        Invader.OnReachEarth -= OnLostOneLive;
 
         enemyHordeController.HordeMover.StopMoving();
 

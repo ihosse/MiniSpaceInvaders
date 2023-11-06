@@ -4,20 +4,20 @@ using System;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(UFOSpawner))]
-[RequireComponent(typeof(InvaderHordeSpawner))]
-[RequireComponent(typeof(InvaderHordeMover))]
-[RequireComponent(typeof(InvaderHordeShooter))]
-public class EnemyHordeController : MonoBehaviour
+[RequireComponent(typeof(InvadersSpawner))]
+[RequireComponent(typeof(InvaderMover))]
+[RequireComponent(typeof(InvadersShooter))]
+public class EnemyHorde : MonoBehaviour
 {
-    public List<InvaderController> Enemies { get { return _enemies; } }
-    public InvaderHordeMover HordeMover { get { return enemyHordeMover; } }
+    public List<Invader> Enemies { get { return _enemies; } }
+    public InvaderMover HordeMover { get { return enemyHordeMover; } }
 
-    private List<InvaderController> _enemies;
+    private List<Invader> _enemies;
 
     private UFOSpawner ufoSpawner;
-    private InvaderHordeSpawner enemyHordeSpawner;
-    private InvaderHordeMover enemyHordeMover;
-    private InvaderHordeShooter enemyShooter;
+    private InvadersSpawner enemyHordeSpawner;
+    private InvaderMover enemyHordeMover;
+    private InvadersShooter enemyShooter;
 
     public event Action OnHordeSpawned;
     public event Action OnLevelCompleted;
@@ -26,18 +26,18 @@ public class EnemyHordeController : MonoBehaviour
     private int enemyKills;
     private int initialHordeSize;
 
-    private EnemySpeedController enemySpeedController;
+    private EnemiesSpeed enemySpeedController;
 
     public void Initialize()
     {
         enemyKills = 0;
 
-        enemySpeedController = GetComponent<EnemySpeedController>();
+        enemySpeedController = GetComponent<EnemiesSpeed>();
 
         ufoSpawner = GetComponent<UFOSpawner>();
-        enemyHordeSpawner = GetComponent<InvaderHordeSpawner>();
-        enemyHordeMover = GetComponent<InvaderHordeMover>();
-        enemyShooter = GetComponent<InvaderHordeShooter>();
+        enemyHordeSpawner = GetComponent<InvadersSpawner>();
+        enemyHordeMover = GetComponent<InvaderMover>();
+        enemyShooter = GetComponent<InvadersShooter>();
 
         ufoSpawner.Initialize(enemySpeedController);
         enemyHordeMover.Initialize(Globals.level, enemySpeedController);
@@ -47,7 +47,7 @@ public class EnemyHordeController : MonoBehaviour
         StartCoroutine(enemyHordeSpawner.CreateEnemyHorde());
     }
 
-    private void OnHordeSpawnedHandler(List<InvaderController> enemies)
+    private void OnHordeSpawnedHandler(List<Invader> enemies)
     {
         _enemies = enemies;
         initialHordeSize = _enemies.Count;
@@ -67,7 +67,7 @@ public class EnemyHordeController : MonoBehaviour
     {
         ufoSpawner.Ufo.OnKill += OnUFOKillHander;
 
-        foreach (InvaderController enemy in _enemies)
+        foreach (Invader enemy in _enemies)
         {
             enemy.OnKill += OnInvaderKillHandler;
         }
@@ -84,7 +84,7 @@ public class EnemyHordeController : MonoBehaviour
         OnEnemyKilled?.Invoke(enemy.Points);
 
         Destroy(enemy.gameObject);
-        _enemies.Remove(enemy as InvaderController);
+        _enemies.Remove(enemy as Invader);
 
         enemyKills++;
 

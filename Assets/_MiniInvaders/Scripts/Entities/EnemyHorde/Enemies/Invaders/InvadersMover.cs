@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class InvaderMovement : MonoBehaviour
+public class InvadersMover : MonoBehaviour
 {
     private float horizontalPositionMinLimit;
     private float horizontalPositionMaxLimit;
     private float verticalGameOverLimit;
 
-    private InvaderController invader;
-    private EnemySpeedController speedController;
+    private Invader invader;
+    private EnemiesSpeed speedController;
 
     private void Update()
     {
@@ -23,7 +23,7 @@ public class InvaderMovement : MonoBehaviour
         CheckVerticalLimit();
     }
 
-    public void Initialize(InvaderController invader, EnemySpeedController speedController, EnemyPositionLimits enemyPositionLimits)
+    public void Initialize(Invader invader, EnemiesSpeed speedController, EnemyPositionLimits enemyPositionLimits)
     {
         this.invader = invader;
         this.speedController = speedController;
@@ -51,6 +51,6 @@ public class InvaderMovement : MonoBehaviour
     private void CheckVerticalLimit()
     {
         if (transform.position.y < verticalGameOverLimit)
-            InvaderController.OnReachEarth?.Invoke();
+            Invader.OnReachEarth?.Invoke();
     }
 }

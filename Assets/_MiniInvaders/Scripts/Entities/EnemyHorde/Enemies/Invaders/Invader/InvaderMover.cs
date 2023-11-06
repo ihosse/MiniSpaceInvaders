@@ -9,7 +9,7 @@ public struct EnemyPositionLimits
     public float verticalGameOver;
 }
 
-public class InvaderHordeMover : MonoBehaviour 
+public class InvaderMover : MonoBehaviour 
 {
     [SerializeField]
     private float enemyVelocityIncreaseMultiplier = 1.1f;
@@ -20,23 +20,23 @@ public class InvaderHordeMover : MonoBehaviour
     [SerializeField]
     private EnemyPositionLimits enemyPositionLimits;
 
-    private List<InvaderController> enemies;
-    private EnemySpeedController enemySpeedController;
+    private List<Invader> enemies;
+    private EnemiesSpeed enemySpeedController;
 
     private int currentLevel;
 
-    public void Initialize(int currentLevel, EnemySpeedController enemySpeedController)
+    public void Initialize(int currentLevel, EnemiesSpeed enemySpeedController)
     {
         this.currentLevel = currentLevel;
         this.enemySpeedController = enemySpeedController;
     }
 
-    public void StartMoving(List <InvaderController> enemies)
+    public void StartMoving(List <Invader> enemies)
     {
         this.enemies = enemies;
         enemySpeedController.DefineInitialSpeed(currentLevel);
         
-        foreach (InvaderController enemy in enemies)
+        foreach (Invader enemy in enemies)
         {
             enemy.Initialize(enemySpeedController, enemyPositionLimits);
             enemy.OnReachBoundary += InvertSpeedAndMoveDown;
@@ -57,7 +57,7 @@ public class InvaderHordeMover : MonoBehaviour
         if (enemies == null)
             return;
 
-        foreach (InvaderController enemy in enemies)
+        foreach (Invader enemy in enemies)
         {
             enemy.ActivateAnimation(false);
         }
@@ -70,7 +70,7 @@ public class InvaderHordeMover : MonoBehaviour
         if (enemies == null)
             return;
 
-        foreach (InvaderController enemy in enemies)
+        foreach (Invader enemy in enemies)
         {
             enemy?.transform.Translate(Vector2.down * verticalSpeed);
         }

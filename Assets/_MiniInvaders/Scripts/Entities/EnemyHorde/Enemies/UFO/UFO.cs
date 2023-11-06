@@ -11,14 +11,14 @@ public class UFO : Enemy
     [SerializeField]
     private float horizontalFinalPosition;
 
-    private EnemySpeedController speedController;
+    private EnemiesSpeed speedController;
 
     public void OnEnable()
     {
         transform.position = initialPosition;
     }
 
-    public void Initialize(EnemySpeedController speedController)
+    public void Initialize(EnemiesSpeed speedController)
     {
         this.speedController = speedController;
         ActivateAnimation(true);

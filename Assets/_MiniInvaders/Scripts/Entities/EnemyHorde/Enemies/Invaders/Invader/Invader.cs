@@ -2,8 +2,8 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(InvaderMovement))]
-public class InvaderController : Enemy
+[RequireComponent(typeof(InvadersMover))]
+public class Invader : Enemy
 {  
     public Action OnReachBoundary;
     public static Action OnReachEarth;
@@ -11,15 +11,15 @@ public class InvaderController : Enemy
     [SerializeField]
     private EnemyBomb bullet;
 
-    private InvaderMovement movement;
+    private InvadersMover movement;
 
     protected override void Start()
     {
         base.Start();
-        movement = GetComponent<InvaderMovement>();
+        movement = GetComponent<InvadersMover>();
     }
     
-    public void Initialize(EnemySpeedController speedController, EnemyPositionLimits enemyPositionLimits)
+    public void Initialize(EnemiesSpeed speedController, EnemyPositionLimits enemyPositionLimits)
     {
         movement.Initialize(
                             this,

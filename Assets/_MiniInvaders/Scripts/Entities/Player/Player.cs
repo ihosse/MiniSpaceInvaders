@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(SpawnPrefab))]
+[RequireComponent(typeof(Explosion))]
 public class Player : MonoBehaviour
 {
     public event Action OnKilled;
@@ -21,12 +21,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private PlayerBullet bullet;
 
-    private SpawnPrefab explosion;
+    private Explosion explosion;
     private bool isInControl;
 
     private void Start()
     {
-        explosion = GetComponent<SpawnPrefab>();
+        explosion = GetComponent<Explosion>();
     }
     private void Update()
     {

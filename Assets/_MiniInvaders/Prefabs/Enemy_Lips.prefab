@@ -98,10 +98,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7875423691276195019}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eae0787c8d994e54d99b8b1ee12daec5, type: 3}
+  m_Script: {fileID: 11500000, guid: 093a5315724e6044ca1186bd64981512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 30
+  points: 50
   bullet: {fileID: 576802920843398798, guid: 40e84b866af6f064c93abe48519bbcca, type: 3}
 --- !u!114 &-5422288262927730587
 MonoBehaviour:

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemySpeedController:MonoBehaviour
+public class EnemiesSpeed:MonoBehaviour
 {
     public float Speed { get { return direction * speed; } }
 

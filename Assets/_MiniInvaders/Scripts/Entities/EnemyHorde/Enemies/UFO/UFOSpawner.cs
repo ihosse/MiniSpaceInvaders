@@ -16,7 +16,7 @@ public class UFOSpawner : MonoBehaviour
     
     private float timeToShow;
 
-    public void Initialize(EnemySpeedController speedController)
+    public void Initialize(EnemiesSpeed speedController)
     {
         Ufo = Instantiate(ufoPrefab);
         Ufo.Initialize(speedController);

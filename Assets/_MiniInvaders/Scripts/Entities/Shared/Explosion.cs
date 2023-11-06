@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpawnPrefab : MonoBehaviour
+public class Explosion : MonoBehaviour
 {
     [SerializeField]
     private GameObject prefab;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class InvaderHordeShooter:MonoBehaviour 
+public class InvadersShooter:MonoBehaviour 
 {
     [SerializeField]
     private float initialTimeToShoot = 1;
@@ -15,13 +15,13 @@ public class InvaderHordeShooter:MonoBehaviour
 
     private IEnumerator coroutine;
 
-    private List<InvaderController> enemies;
+    private List<Invader> enemies;
 
     public void DefineTimeToShot(int level) 
     {
         timeToShoot = initialTimeToShoot / (level * timetoShootDecreaseFactor);
     }
-    public void StartShooting(List<InvaderController> enemies)
+    public void StartShooting(List<Invader> enemies)
     {
         this.enemies = enemies;
         coroutine = ChooseEnemyAndShot();

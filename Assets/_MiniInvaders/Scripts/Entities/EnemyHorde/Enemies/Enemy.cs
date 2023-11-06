@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(SpawnPrefab))]
+[RequireComponent(typeof(Explosion))]
 public abstract class Enemy : MonoBehaviour
 {
     public int Points { get { return points; } }
@@ -12,13 +12,13 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField]
     protected int points;
 
-    protected SpawnPrefab explosion;
+    protected Explosion explosion;
     protected Animator animator;
 
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
-        explosion = GetComponent<SpawnPrefab>();
+        explosion = GetComponent<Explosion>();
     }
     public virtual void TakeHit()
     {

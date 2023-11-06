@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-class InvaderHordeSpawner : MonoBehaviour
+class InvadersSpawner : MonoBehaviour
 {
-    public event Action<List<InvaderController>> OnHordeSpawned;
+    public event Action<List<Invader>> OnHordeSpawned;
 
     [SerializeField]
     private int horizontalSize = 11;
@@ -29,7 +29,7 @@ class InvaderHordeSpawner : MonoBehaviour
     public IEnumerator CreateEnemyHorde()
     {
         int enemyIndex = 0;
-        List<InvaderController> enemies = new List<InvaderController>();
+        List<Invader> enemies = new List<Invader>();
 
         for (int row = 0; row < verticalSize; row++)
         {
@@ -40,7 +40,7 @@ class InvaderHordeSpawner : MonoBehaviour
                 float horizontalPosition = (col * spaceBetweenEnemies) - horizontalOffset;
                 float verticalPosition = (row * spaceBetweenEnemies) - verticalOffset;
 
-                var currentEnemy = Instantiate(enemiesPrefab[enemyIndex], this.transform).GetComponent<InvaderController>();
+                var currentEnemy = Instantiate(enemiesPrefab[enemyIndex], this.transform).GetComponent<Invader>();
                 currentEnemy.transform.position = new Vector2(horizontalPosition, verticalPosition);
 
                 enemies.Add(currentEnemy);
